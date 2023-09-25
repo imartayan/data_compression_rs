@@ -20,4 +20,5 @@ cargo t packed_records -- --show-output
 I try to stick to the original code whenever possible — some of the design choices I made include:
 - using [`smallrng`](https://rust-random.github.io/rand/rand/rngs/struct.SmallRng.html) for random number generation
 - using [`serde`](https://serde.rs/) and [`bincode`](https://docs.rs/bincode/) for serialization
+- using [`num-traits`](https://docs.rs/num-traits/) to have type-generic `msb` and `lsb` functions
 - avoiding architecture-specific instructions (I want the code to work on ARM architectures as well)
