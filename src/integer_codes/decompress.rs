@@ -1,4 +1,4 @@
-use super::integer_codes::IntegerCode;
+use super::IntegerCode;
 use crate::integer_codes::bit_vector_iterator::BitVectorIterator;
 use crate::introduction::bit_vector::BitVector;
 use std::fs::File;
@@ -40,7 +40,7 @@ pub fn decompress<C: IntegerCode<u64>, P: AsRef<Path>>(input_filename: P) {
 
 #[cfg(test)]
 mod tests {
-    use super::super::integer_codes::{DeltaCode, GammaCode, RiceCode, VByteCode};
+    use super::super::{DeltaCode, GammaCode, RiceCode, VByteCode};
     use super::*;
 
     #[test]

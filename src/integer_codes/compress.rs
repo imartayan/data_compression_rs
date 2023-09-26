@@ -1,4 +1,4 @@
-use super::integer_codes::IntegerCode;
+use super::IntegerCode;
 use crate::introduction::bit_vector::{BitVector, BitVectorBuilder};
 use std::fs::File;
 use std::io::{BufRead, BufReader};
@@ -53,7 +53,7 @@ pub fn compress<C: IntegerCode<u64>, P: AsRef<Path>>(input_lists_filename: P, ou
 
 #[cfg(test)]
 mod tests {
-    use super::super::integer_codes::{DeltaCode, GammaCode, RiceCode, VByteCode};
+    use super::super::{DeltaCode, GammaCode, RiceCode, VByteCode};
     use super::*;
 
     #[test]
