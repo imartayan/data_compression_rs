@@ -19,7 +19,6 @@ pub fn decompress<C: IntegerCode<u64>, P: AsRef<Path>>(input_filename: P) {
     let mut num_ints = 0;
 
     println!("decompressing {} lists...", num_lists);
-    let mut sum = 0;
     let now = Instant::now();
 
     for _ in 0..num_lists {
@@ -30,13 +29,11 @@ pub fn decompress<C: IntegerCode<u64>, P: AsRef<Path>>(input_filename: P) {
             x = C::read(&mut it) + prev_x;
             assert!(x >= prev_x);
             prev_x = x;
-            sum += x;
         }
         num_ints += list_size;
     }
 
     let elapsed = now.elapsed().as_micros();
-    println!("(ignore: {})", sum);
     println!("decompressed {} integers in {} µs", num_ints, elapsed);
     println!("({:.2} ns/int)", elapsed as f64 * 1000.0 / num_ints as f64);
 }
