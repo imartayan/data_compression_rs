@@ -1,6 +1,10 @@
 use super::util::num_64bit_words_for;
+use bincode::{deserialize_from, serialize_into};
+use serde::{Deserialize, Serialize};
+use std::io::{Read, Write};
 use std::mem::swap;
 
+#[derive(Serialize, Deserialize)]
 pub struct BitVector {
     num_bits: usize,
     bits: Vec<u64>,
@@ -53,6 +57,17 @@ impl BitVector {
         }
 
         word
+    }
+
+    pub fn save<W: Write>(&self, writer: W) {
+        serialize_into(writer, &self).unwrap();
+    }
+
+    pub fn load<R: Read>(&mut self, reader: R) {
+        let mut bv: BitVector = deserialize_from(reader).unwrap();
+        swap(&mut self.num_bits, &mut bv.num_bits);
+        self.bits.resize(bv.bits.len(), 0);
+        self.bits.swap_with_slice(&mut bv.bits);
     }
 }
 
