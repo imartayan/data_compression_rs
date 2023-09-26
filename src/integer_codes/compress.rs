@@ -55,26 +55,26 @@ mod tests {
 
     #[test]
     fn compress_gamma() {
-        compress::<GammaCode, _>("data/lists.txt", "data/lists_gamma");
+        compress::<GammaCode, _>("data/lists.txt", "data/out_gamma.bin");
     }
 
     #[test]
     fn compress_delta() {
-        compress::<DeltaCode, _>("data/lists.txt", "data/lists_delta");
+        compress::<DeltaCode, _>("data/lists.txt", "data/out_delta.bin");
     }
 
     #[test]
     fn compress_vbyte() {
-        compress::<VByteCode, _>("data/lists.txt", "data/lists_vbyte");
+        compress::<VByteCode, _>("data/lists.txt", "data/out_vbyte.bin");
     }
 
     #[test]
-    fn compress_ricek1() {
-        compress::<RiceCode<1>, _>("data/lists.txt", "data/lists_ricek1");
+    fn compress_rice_k1() {
+        compress::<RiceCode<1>, _>("data/lists.txt", "data/out_rice_k1.bin");
     }
 
     #[test]
-    fn compress_ricek2() {
-        compress::<RiceCode<2>, _>("data/lists.txt", "data/lists_ricek2");
+    fn compress_rice_k2() {
+        compress::<RiceCode<2>, _>("data/lists.txt", "data/out_rice_k2.bin");
     }
 }
