@@ -39,7 +39,10 @@ pub fn compress<C: IntegerCode<u64>, P: AsRef<Path>>(input_lists_filename: P, ou
     println!("compressed {} lists", num_lists);
     println!("({} integers)", num_ints);
     println!("written {} bits", builder.num_bits());
-    println!("({} bits/int)", builder.num_bits() as f64 / num_ints as f64);
+    println!(
+        "({:.2} bits/int)",
+        builder.num_bits() as f64 / num_ints as f64
+    );
 
     let mut bits = BitVector::new();
     builder.build(&mut bits);
