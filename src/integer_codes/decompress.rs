@@ -27,7 +27,7 @@ pub fn decompress<C: IntegerCode<u64>, P: AsRef<Path>>(input_filename: P) {
         let mut x;
         for _ in 0..list_size {
             x = C::read(&mut it) + prev_x;
-            assert!(x >= prev_x);
+            debug_assert!(x >= prev_x);
             prev_x = x;
         }
         num_ints += list_size;

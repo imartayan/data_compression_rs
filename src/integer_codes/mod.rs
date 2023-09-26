@@ -17,7 +17,7 @@ pub struct UnaryCode;
 
 impl IntegerCode<usize> for UnaryCode {
     fn write(builder: &mut BitVectorBuilder, x: usize) {
-        assert!(x < 64);
+        debug_assert!(x < 64);
         let u = 1u64 << x;
         builder.append_bits(u, x + 1);
     }
@@ -32,18 +32,18 @@ pub struct BinaryCode<const R: u64>;
 impl<const R: u64> IntegerCode<u64> for BinaryCode<R> {
     /// write the integer x <= r using b=ceil(log2(r+1)) bits
     fn write(builder: &mut BitVectorBuilder, x: u64) {
-        assert!(R > 0);
-        assert!(x <= R);
+        debug_assert!(R > 0);
+        debug_assert!(x <= R);
         let b = msb(R) + 1;
         builder.append_bits(x, b);
     }
 
     /// read b=ceil(log2(r+1)) bits and interprets them as the integer x
     fn read(it: &mut BitVectorIterator) -> u64 {
-        assert!(R > 0);
+        debug_assert!(R > 0);
         let b = msb(R) + 1;
         let x = it.take(b);
-        assert!(x <= R);
+        debug_assert!(x <= R);
         x
     }
 }
@@ -86,7 +86,7 @@ pub struct RiceCode<const K: usize>;
 
 impl<const K: usize> IntegerCode<u64> for RiceCode<K> {
     fn write(builder: &mut BitVectorBuilder, x: u64) {
-        assert!(K > 0);
+        debug_assert!(K > 0);
         let q = x >> K;
         let r = x - (q << K);
         GammaCode::write(builder, q);
@@ -94,7 +94,7 @@ impl<const K: usize> IntegerCode<u64> for RiceCode<K> {
     }
 
     fn read(it: &mut BitVectorIterator) -> u64 {
-        assert!(K > 0);
+        debug_assert!(K > 0);
         let q = GammaCode::read(it);
         let r = it.take(K);
         r + (q << K)

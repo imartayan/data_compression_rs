@@ -26,7 +26,7 @@ pub fn compress<C: IntegerCode<u64>, P: AsRef<Path>>(input_lists_filename: P, ou
             x = 0;
         } else {
             x = line.unwrap().parse().unwrap();
-            assert!(x >= prev_x);
+            debug_assert!(x >= prev_x);
             C::write(&mut builder, x - prev_x);
             num_ints += 1;
             list_size -= 1;

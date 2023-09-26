@@ -33,7 +33,7 @@ impl<'a> BitVectorIterator<'a> {
 
     /// return 1 byte assuming position is aligned to a 8-bit boundary
     pub fn take_one_byte(&mut self) -> u64 {
-        assert!(self.pos % 8 == 0);
+        debug_assert!(self.pos % 8 == 0);
         if self.avail == 0 {
             self.fill_buf();
         }
@@ -46,7 +46,7 @@ impl<'a> BitVectorIterator<'a> {
 
     /// return the next l bits from the current position and advance by l bits
     pub fn take(&mut self, l: usize) -> u64 {
-        assert!(l <= 64);
+        debug_assert!(l <= 64);
         if self.avail < l {
             self.fill_buf();
         }

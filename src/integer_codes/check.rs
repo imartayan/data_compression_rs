@@ -36,7 +36,7 @@ pub fn check<C: IntegerCode<u64>, P: AsRef<Path>>(
             x = 0;
         } else {
             x = C::read(&mut it) + prev_x;
-            assert!(x >= prev_x);
+            debug_assert!(x >= prev_x);
             expected = line.unwrap().parse().unwrap();
             if x != expected {
                 panic!("expected {} but got {}", expected, x);

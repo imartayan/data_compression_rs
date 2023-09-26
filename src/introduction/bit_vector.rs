@@ -27,8 +27,8 @@ impl BitVector {
     }
 
     pub fn get_bits(&self, pos: usize, len: usize) -> u64 {
-        assert!(pos + len <= self.num_bits);
-        assert!(len <= 64);
+        debug_assert!(pos + len <= self.num_bits);
+        debug_assert!(len <= 64);
 
         if len == 0 {
             return 0;
@@ -46,7 +46,7 @@ impl BitVector {
     }
 
     pub fn get_word64(&self, pos: usize) -> u64 {
-        assert!(pos <= self.num_bits);
+        debug_assert!(pos <= self.num_bits);
 
         let block = pos / 64;
         let shift = pos % 64;
@@ -104,8 +104,8 @@ impl BitVectorBuilder {
     }
 
     pub fn set_bits(&mut self, pos: usize, x: u64, len: usize) {
-        assert!(pos + len <= self.num_bits);
-        assert!(len == 64 || (x >> len) == 0); // no other bits must be set
+        debug_assert!(pos + len <= self.num_bits);
+        debug_assert!(len == 64 || (x >> len) == 0); // no other bits must be set
         if len == 0 {
             return;
         }
@@ -125,8 +125,8 @@ impl BitVectorBuilder {
     }
 
     pub fn append_bits(&mut self, x: u64, len: usize) {
-        assert!(len <= 64);
-        assert!(len == 64 || (x >> len) == 0); // no other bits must be set
+        debug_assert!(len <= 64);
+        debug_assert!(len == 64 || (x >> len) == 0); // no other bits must be set
         if len == 0 {
             return;
         }
